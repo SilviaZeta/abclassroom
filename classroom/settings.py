@@ -193,4 +193,4 @@ MANAGERS = ADMINS #will be notified of 404 errors.
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage' #reduce the size of the static files when they are served
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #reduce the size of the static files when they are served

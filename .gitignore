@@ -133,8 +133,4 @@ dmypy.json
 #Configuration variables
 *.env
 
-#Ignore all migrations apart from __init__ file
-_migrations/*
-!_migrations/__init__.py
-
 *.DS_Store

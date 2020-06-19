@@ -1,0 +1,287 @@
+.body {
+	height: auto;
+	min-height: 100%;
+}
+
+#page-container {
+	min-height: 100vh;
+	position: relative;
+}
+
+
+#page-container, #page-wrapper {
+	display: flex;
+	flex-direction: column;
+	background: #eae9d3; /* bekers sandkorn */
+	align-items: center;
+}
+
+#page-wrapper {
+    flex-grow: 1;
+	margin: 0 ;
+	padding-bottom: 3em; /* Footer height */
+	padding-top: 0rem; /* Footer height */
+}
+
+.Footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+  	left: 0;
+  	bottom: 0;
+	bottom: 0;
+	min-height: 3em;
+	padding: 10px;
+	width: 100%;
+	background: #9477c0; /* dimgrey */
+}
+
+
+.card-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center; 
+	padding: 30px;
+	max-width: 305px;	
+	margin-bottom: 5%;
+}
+
+
+.card-list {
+	display: inline-block; 
+	list-style: none;
+	padding: 0;
+}
+
+.card-options, .card-fields {
+	display: flex;
+	list-style: none;
+	justify-content: center;
+	align-items: center;
+}
+
+.card-options {
+	padding: 10px;
+	margin: 0;
+	font-size: 20px;
+	font-weight: 700;	
+	max-width: 400px;	
+}
+
+.card-options li {
+	margin-right: 20px;
+}
+
+.card-options .isactive a {
+	color: #9477c0; /* lilac */
+	text-decoration: underline;
+}
+
+.card-options .isinactive a {
+	color: grey;
+	text-decoration: underline;
+}
+
+.card-fields {
+	display: inline-block; 
+	background-color: #fff;
+	color: #9477c0; /* lilac */
+	border: none;
+	padding: 0px; /* important */
+	margin: 0px;
+	margin-top: 5%;
+	max-width: 305px; /* important */
+	text-align: left;
+}
+
+
+.header, .text-centered {
+	font-size: 30px;
+	font-weight: 700;
+	color: black;
+}
+
+.header {
+	padding: 20px;
+}
+
+.header a {
+	color: black;
+}
+
+.header a:hover {
+	color: black;
+	text-decoration: none;
+}
+
+.input-group-prepend .input-group-text{
+	background: #ecd848;
+}
+
+
+.form-control:focus {
+	border: solid 1.5px #4d3e64; /* saturated purple */
+	box-shadow: none;
+}
+
+
+.btn-custom {
+	background: #ce5a6b;
+	color: white;
+}
+
+.btn-custom:hover {
+	background: #bb6d79; /* ancient red */
+	color: white;
+}
+
+.link-custom {
+	background: transparent;
+	color: #ce5a6b;
+}
+
+.link-custom:hover {
+	background: transparent;
+	color: #bb6d79;
+}
+
+
+.card-fields ul, .messages ul {
+	padding-left: 0rem;
+	list-style-type: none;
+}
+
+.card-fields li, .messages li {
+	diplay: flex;
+	padding: 5px;
+	padding-left: 0px;
+	align-items: center;
+}
+
+
+.messages {
+	display: table;
+	padding: 0px;
+	margin: 4px 0;
+	width: calc(100% - 20px);
+
+}
+
+.card-fields li .errormsg {
+	padding-left: 0px;
+  	display: flex;
+	font-size: 13px;
+	color: #ff4281; /* pinkish */
+	
+}
+
+.errormsg {
+	padding: 0px;
+	margin: 0px;
+	max-width: 200px;
+
+}
+
+
+.btn-sign {
+	background: #C0C0C0; /* silver */
+	color: #696969; /* dimgray */
+	font-size: 16px;
+	text-align: center;
+	border: none;
+	min-height: 30px;
+	height: 30px;
+	width: 100%;
+	border-radius: 0.25rem;
+}
+
+.btn-sign:hover {
+	background: #dcdcdc; /* gainsboro */
+	color: #696969; /* dimgray */
+
+}
+
+.question {
+	font-size: 16px;
+	font-weight: 500;
+	text-align: center;
+	text-decoration: underline;
+	padding: 10px;
+}
+
+.blue-link {
+	font-size: 16px;
+	font-weight: 500;
+	text-align: center;
+	text-decoration: underline;
+}
+
+
+
+.input-group-text{
+	background: #f7ba5b;
+	color: white; 
+	border: 0; 
+	border-radius: 0.25rem 0 0 0.25rem;
+}
+
+
+.form-control {
+	border-radius: 0 0.25rem 0.25rem 0;
+}
+
+
+.card-authentication {
+	position: absolute;
+	top: 5rem;
+	color: #2f3740;
+	padding: 10px;	
+	border-radius: 5px;
+	min-height: 50%;
+}
+
+
+.card-message {
+	display: flex;
+	justify-content: center;
+	align-items: center; 
+	position: absolute;
+	top: 5rem;
+	color: #2f3740;
+	padding: 10px;	
+	border-radius: 5px;
+	max-width: 400px;
+	width: calc(100% - 20px);
+	height: auto;
+}
+
+.card-content-message {
+	display: flex;
+	justify-content: center;
+	align-itemns: center;
+	text-align: center;
+	padding: 10px;
+	display: inline-block; 
+	max-width: 305px;	
+}
+
+.card-content-message p {
+	color: black;
+	font-size: 16px;
+	padding: auto 0px 20px auto;
+	margin-left: 35px;
+	margin-right: 35px;
+	text-align: left;
+}
+
+
+.card-message-title {
+	text-align: center;
+	font-size: 18px;
+	font-weight: 700px;
+	padding-bottom: 10px;
+	color: #696969; /* dimgray */
+}
+
+

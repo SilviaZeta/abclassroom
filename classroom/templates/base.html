@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+  <head> 
+    <title>Classroom</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Silvia Zeni">
+    <meta name="keywords" content="classroom meeting grouping school">
+    <meta name="description" content="Classroom">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'image/favicon_io/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'image/favicon_io/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'image/favicon_io/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'image/favicon_io/site.webmanifest' %}">
+   
+    <!-- Google Fonts -->
+
+    <!-- JQuery draggable -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- jQuery countdown -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.countdown.css' %}">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="{% static 'css/home-styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login-styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile-styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/class-styles.css' %}">
+  </head>
+
+
+    {% block page_content %}
+
+
+    {% endblock %}
+
+ <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> <!-- necessary for dropdown menu to work-->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    {% block javascript %} <!-- app-specific javascript code --> {% endblock %}
+    <script type="text/javascript" src="{% static 'js/csrf.js' %}"></script>
+
+    <!-- jQuery Draggable --> 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- jQuery Countdown -->
+    <script type="text/javascript" src="{% static 'js/countdown/jquery.plugin.js' %}"></script> 
+    <script type="text/javascript" src="{% static 'js/countdown/jquery.countdown.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/countdown/jquery.countdown.min.js' %}"></script>
+
+
+</html>
+
+
+
+
+
+
+

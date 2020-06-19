@@ -1,0 +1,25 @@
+{% autoescape off %}
+
+<!DOCTYPE html>
+<html>
+	<body>
+		<p>Hello,</p>
+
+		<p>{{ from }} sent you a grouping invite!</p>
+
+		<p>Class subject: {{ class.subject }}<br>
+		Class slug: {{ class.slug }}</p>
+
+		<p>You can now login onto your Classroom account and choose the group you want to be in:</p>
+
+		<a href="{{ domain }}{% url 'login' %}">{{ domain }}{% url 'login' %}</a>
+
+		<p>If clicking the link above doesn't work, please copy and paste the URL in a new browser window instead.</p>
+		
+		<p>This invite will expire {{ expiry }}.</p>
+
+		<p>Sincerely,<br>
+		The Classroom Team</p>
+	</body>	
+</html>
+{% endautoescape %}

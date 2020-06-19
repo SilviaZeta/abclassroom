@@ -1,0 +1,20 @@
+{% extends "profile_page.html" %}
+{% load static %}
+
+{% block content %}
+    <body>
+        <dir class="main">
+            <div class='wholepage-form'>
+
+                <h5>Priority Invite</h5>
+
+                <p>Reach your students via email and invite them to reserve their priority.</p>
+                <hr>
+                <br>
+
+                {% include "form_template.html" with form=form %}
+
+            </div>  
+        </dir>
+    </body>
+{% endblock %}

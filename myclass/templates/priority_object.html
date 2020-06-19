@@ -1,0 +1,20 @@
+{% extends "class_dashboard.html" %}
+{% load static %}
+
+{% block content %}
+
+	<!-- Draggable DIV -->
+	<div class="priority_student" id='draggable'>
+	  <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
+	  	<div id="mydivheader">
+	  		<p>PRIORITY INVITE</p>
+	  		<p>Class slug: {{ class.slug }}</p>
+	  	</div>
+	  	<div class="countdown" datetime="{{ expiry_date }}">
+	  		<div id="demo"></div>
+	  	</div>
+	  	<p>The 1 position over {{ class.num_users }} is still available.</p>
+	  	<button class='btn btn-primary btn-sm'><a href="#">Reserve</a></button>
+	</div> 
+
+{% endblock %}

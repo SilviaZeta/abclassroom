@@ -1,0 +1,20 @@
+{% extends "profile_page.html" %}
+{% load static %}
+
+
+{% block content %}
+	<body>
+        <dir class="main">
+            <div class='wholepage-form'>
+
+                <h5>Class Details</h5>
+                <p> Insert or edit information relative to a class.</p>
+                <hr>
+                <br>
+
+                {% include "form_template.html" with form=form %}
+
+            </div>  
+        </dir>
+	</body>
+{% endblock %}

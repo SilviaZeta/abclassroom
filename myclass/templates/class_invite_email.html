@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<p>Hello,</p>
+
+		<p>{{ from }} has invited you to join his class {{ class.slug }} on {{ class.subject }}.</p>
+		
+		{% if message %}<p>{{ from }}: <i>{{ message }}</i></p>{% endif %}
+
+		<p>Sign up on Classroom to join his class:</p>
+
+		<a href="{{ domain }}{% url 'signup' %}">{{ domain }}{% url 'signup' %}</a>
+
+		<p>If clicking the link above doesn't work, please copy and paste the URL in a new browser
+		window instead.</p>
+
+		<p>Sincerely,</p>
+		<p>The Classroom Team</p>
+	</body>	
+</html>

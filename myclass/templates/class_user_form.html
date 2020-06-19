@@ -1,0 +1,20 @@
+{% extends "profile_page.html" %}
+{% load static %}
+
+{% block content %}
+
+	<body>
+        <dir class="main">
+            <div class='wholepage-form'>
+
+                <h5>Class Invite</h5>
+                <p> Enter the username or the email of the user you want to invite to your classroom:</p>
+                <hr>
+                <br>
+
+                {% include "form_template.html" with form=form %}
+
+            </div>  
+        </dir>
+	</body>
+{% endblock %}

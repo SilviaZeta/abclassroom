@@ -1,0 +1,105 @@
+{% extends "message_form.html" %}
+{% load static %}
+
+{% block javascript %}
+	<script type="text/javascript" src="{% static 'js/signup_checks.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+
+	<article class="card card-authentication">
+		<div class="card-content">
+
+			<div class="card-list">
+
+				<ul class="card-options">
+					<li>
+						<div class="isinactive">
+							<a href="{% url 'login' %}">Log in</a>
+						</div>	
+					</li>
+					<li>
+						<div class="isactive">
+							<a href="{% url 'signup' %}">Sign up</a>
+						</div>
+					</li>
+				</ul>					
+
+				<form method="POST" action='.' novalidate> 
+					{% csrf_token %}
+
+		            {% if form.non_field_errors %}
+		              <div class="errormsg">
+		                {% for error in form.non_field_errors %}
+		                  {{ error }}
+		                {% endfor %}
+		              </div>
+		            {% endif %}
+
+
+					<ul class="card-fields">
+						<li>
+							<dir class="errormsg">{{ form.full_name.errors }}</dir>
+
+							<div class="input-group mb-1">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-user"></i></span>
+									<input name="full_name" class="form-control form-control-sm" placeholder="Enter Full Name" type="text">
+								</div>
+							</div>	
+						</li>	
+						<li>
+							<dir class="errormsg" id="error_username">{{ form.username.errors }}</dir>
+							<div class="input-group mb-1">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-user"></i></span>
+									<input name="username" id="id_username" class="form-control form-control-sm" placeholder="Enter Username" type="text" username-url="{% url 'validate_username' %}">
+								</div>
+							</div>
+						</li>
+						<li>
+							<dir class="errormsg" id="error_email">{{ form.email.errors }}</dir>
+
+							<div class="input-group mb-1">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-envelope"></i></span>
+									<input name="email" id="id_email" class="form-control form-control-sm" placeholder="Enter Email" type="email"
+									email-url="{% url 'validate_email' %}">
+								</div>
+							</div>
+						</li>	
+
+					 	<li>
+					 		<dir class="errormsg" id="error_password1">{{ form.password1.errors }}</dir>
+
+					 		<div class="input-group mb-1">
+								<div class="input-group-prepend">
+					 				<span class="input-group-text"><i class="fas fa-key"></i></span>
+					 				<input name="password1" id="id_password1" class="form-control form-control-sm" placeholder="Enter Password" type="password" password1-url="{% url 'validate_password1' %}">
+					 			</div>
+					 		</div>
+					 	</li>
+
+					 	<li>
+					 		<dir class="errormsg" id="error_password2">{{ form.password2.errors }}</dir>
+
+					 		<div class="input-group mb-2">
+								<div class="input-group-prepend">
+					 				<span class="input-group-text"><i class="fas fa-key"></i></span>
+					 				<input name="password2" id="id_password2" class="form-control form-control-sm" placeholder="Enter Confirmation Password" type="password" password2-url="{% url 'validate_password2' %}">
+					 			</div>
+					 		</div>
+					 	</li>
+					 	<li>
+	    					<button class="btn-sign" type="submit">Sign up</button>
+					 	</li>
+					</ul>
+				</form>
+
+			</div>
+		</div>
+	</article>
+
+
+{% endblock %}

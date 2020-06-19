@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_content %}
+<body>
+	<header>   
+		<div class="header-container-userpage">
+			<nav class="navbar"> 
+				<ul class="navbar-left">
+				    <li class="app-name">
+				        <a href="{% url 'home' %}">Classroom</a>
+				    </li>
+
+				    {% if 'dashboard' not in request.path %}
+					    <li class="nav-item">
+	    					<a class="nav-link active" href="{% url 'dashboard' request.user.username %}">Dashboard</a>
+	  					</li>
+				 	{% endif %}
+				</ul>
+
+				<ul class="navbar-right">
+
+					<li><!-- Profile picture miniature -->
+				  		<div class="card card-mini-picture">
+				  			<a href="{% url 'update_profile' request.user.username %}">
+							<img class="mini-picture" src="{{ request.user.profile.picture.url }}" alt="Profile">
+							</a>
+						</div>
+					</li>
+
+					<li> <!-- User: username -->
+						<p class="welcome-user">Hello, {{ request.user.username }}</p>
+					</li>
+
+				  	<li> <!--Log out -->
+				  		<form method="POST" action="{% url 'logout' %}"> {% csrf_token %}
+							<button class="btn btn-authentication btn-sm" type="submit">
+								<i class="fa fa-fw fa-user"></i>Log out</button>
+						</form>
+				  	</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	{% block content %}
+
+	<!-- page body goes here -->
+
+	{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,164 @@
+
+.*{
+	margin: 0;
+	padding: 0;
+}
+
+.header-container-userpage {
+	background: #4d3e64; /* saturated purple */
+  	padding: 5px; /* important */
+}
+
+
+.header-container-mainpage {
+	background-color: #4d3e64; /* saturated purple */
+  	padding: 5px;
+}
+
+.navbar {
+	background-color: #eae9d3; /* bekers sandkorn */
+	display: flex;
+	align-items: center;
+	vertical-align: middle; 
+	border-radius: 2rem;
+	padding: 10px;
+}
+
+.navbar ul {
+	margin: 0px 10px 0px;
+}
+
+
+.navbar-left {
+	float: left;
+	padding-left: 0px;
+}
+
+.navbar-right {
+	float: right;
+	padding-left: 0px;
+}
+
+.navbar-right, .navbar-left {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}
+
+.navbar-left li, .navbar-right li {
+	display: inline-block;
+	list-style-type: none;   
+}
+
+
+.btn-authentication, .btn-create {
+	font-size: 16px;
+	margin-left: 15px;
+}
+
+.btn-authentication{
+	background-color: #9477c0; /* lilac */
+	border: 2px solid #9477c0; /* lilac */
+	color: white;
+	padding: 3px 3px;
+	border-radius: 0.25rem;
+}
+
+.btn-create {  
+	background-color: white;
+  	color: black;
+  	padding: 5px;
+  	border: 2px solid #9477c0; /* red */
+}
+
+.btn-authentication:hover, .btn-create:hover {
+	background-color: #ecd848; /* yellow */
+	color: black;
+	text-decoration: none;
+}
+
+
+.app-name a {
+	color: black;
+	font-size: 30px; /*size of app name */
+	font-weight: 700;
+	text-decoration: none;
+	text-align: left;
+	margin-left: 0px;
+}
+
+.main {
+	width: 100%;
+	padding: 5px;
+}
+
+.classroom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.classroom .classroom-left {
+    text-align: left;
+}
+
+
+.classroom .classroom-left h2 {
+	padding: 40px 0px 0px 30px;
+	font-weight: 500;
+	font-size: 25px;
+	line-height: 40px;
+}
+
+
+.classroom .classroom-left p {
+	padding: 20px 0px 0px 30px;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.classroom-graphics {
+    display: block;
+    width: 30%
+    float: right;
+}
+
+.classroom-right img {
+    height: auto;
+    flex-grow: 1;
+    width: 100%;
+
+}
+
+
+hr {
+	border: solid 2px #4d3e64;
+	border-radius: 5em;
+
+}
+
+@media only screen and (max-width: 767px) {
+
+	.navbar {
+		justify-content: center;
+	}
+
+	.classroom .classroom-right {
+    	display: none;
+	}
+
+	.classroom .classroom-left h2 {
+		padding: 30px 30px 20px;
+
+	}
+
+	.classroom .classroom-left p {
+		padding: 0px 30px 20px;
+		
+	}
+
+}
+
+

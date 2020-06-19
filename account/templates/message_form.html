@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_content %}
+
+<body>
+	<div id="page-container">
+		<div id="page-wrapper">
+
+			<header class="header">
+				<a href="{% url 'home' %}">Classroom</a>
+			</header>
+
+			{% block content %}
+
+			<!-- message card goes in here -->
+
+			{% endblock %}
+			
+		</div>
+	
+		<footer class="Footer">
+			<div class="text-centered">Classroom</div>
+		</footer>
+	</div>
+</body>
+
+{% endblock %}

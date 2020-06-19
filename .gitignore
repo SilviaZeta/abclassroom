@@ -123,3 +123,18 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Text backup files
+*.bak
+
+# Database
+*.sqlite3
+
+#Configuration variables
+*.env
+
+#Ignore all migrations apart from __init__ file
+_migrations/*
+!_migrations/__init__.py
+
+*.DS_Store

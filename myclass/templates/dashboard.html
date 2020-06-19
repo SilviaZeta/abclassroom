@@ -1,0 +1,142 @@
+{% extends "profile_page.html" %}
+{% load static %}
+
+{% block javascript %}
+	<script type="text/javascript" src="{% static 'js/updates.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/search.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+	<body>
+		
+		<div class="main">
+
+			<div class="container-class-table">
+
+				<h5 class='table-header'>Classes</h5>
+
+				<div class="card card-table">
+					<a class="btn btn-custom btn-sm btn-block" 
+					href="{% url 'create_class' request.user.username %}">Create Class</a>
+
+					<table class="table table-sm class-table">
+						<thead class="thead-light">
+							<tr class='table-row'>
+								<th style="width: 15%">Slug</th>
+								<th style="width: 15%">Subject</th>
+								<th style="width: 20%">Description</th> 
+								<th style="width: 15%">Role</th> 
+								<th style="width: 15%">Enrolled</th>
+								<th style="width: 5%"> </th>
+								<th style="width: 5%"> </th>
+								<th style="width: 5%"> </th>
+								<th style="width: 5%"> </th>
+							</tr>
+						</thread>
+						</tbody>
+						{% for class in class_obj %}
+							<tr class='table-row'>
+								<td class='table-cell'>{{ class.slug }}</td>
+								<td class='table-cell'>{{ class.subject }}</td>
+								<td class='table-cell'>{{ class.description }}</td>
+								<td class='table-cell'>{{ class.role }}</td>
+								<td class='table-cell'>{{ class.users_count }}</td>
+								
+								{% if class.role == "Teacher" %}
+									<td>	
+										<a class="link-custom js-update-class" href="{% url 'update_class' request.user.username class.id %}" title='Edit'><i class="fas fa-edit fa-lg"></i></a>
+									</td>
+
+									<td>
+										<a class="link-custom js-delete-class" href="{% url 'delete_class' request.user.username class.id %}" title='Delete'><i class="fas fa-trash fa-lg"></i></a>
+									</td>
+								{% elif class.role == "Student" or class.role == "Pending"%}
+									<td>
+										<a class="link-custom js-update-class disabled" href="{% url 'update_class' request.user.username class.id %}" title='Edit'><i class="fas fa-edit fa-lg"></i></a>
+									</td>
+
+									<td>
+										<a class="link-custom js-delete-class disabled" href="{% url 'delete_class' request.user.username class.id %}" title='Delete'><i class="fas fa-trash fa-lg"></i></a>
+									</td>
+								{% endif %}
+
+								{% if class.role == "Teacher" or class.role == "Student" %}	
+
+									<td>
+										<a class="link-custom" href="{% url 'class_dashboard' request.user.username class.id %}" title='Open'><i class="fas fa-folder-open fa-lg"></i></a>
+									</td>	
+
+									<td>
+										<button class="btn btn-danger icon-custom update_button" 
+										enroll-users-url="{% url 'enrolled_users' request.user.username %}" class_id="{{ class.id }}" class_role="{{ class.role }}" class_slug="{{ class.slug }}"
+										username="{{ request.user.username }}" title='Enrolled Users'>
+										<i class="fas fa-user fa-lg" aria-hidden="true"></i>
+										</button>
+									</td>	
+								{% else %}
+
+									<td>
+										<a class="link-custom disabled" href="{% url 'class_dashboard' request.user.username class.id %}" title='Open'><i class="fas fa-folder-open fa-lg"></i></a>
+									</td>	
+
+									<td>
+										<button class="icon-custom-disabled update_button" disabled 
+										enroll-users-url="{% url 'enrolled_users' request.user.username %}" class_id="{{ class.id }}" class_role="{{ class.role }}" class_slug="{{ class.slug }}"
+										username="{{ request.user.username }}" title='Enrolled Users'>
+										<i class="fas fa-user fa-lg" aria-hidden="true"></i>
+										</button>
+									</td>	
+								{% endif %}	
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+
+
+				<!-- Search form -->
+				<form class="form-inline d-flex justify-content-left md-form form-sm active-purple-2 mt-2">
+					<input class="form-control form-control-sm mr-3 w-75" id="js-search" search-url="{% url 'search_class' request.user.username %}" type="text" placeholder="Search by Slug"
+				    aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i>
+				</form>
+
+				<form  method='POST' id="search-class-form" join-class-url="{% url 'join_class' request.user.username %}">{% csrf_token %}
+
+					<div class="list-group" id="search-result" style="padding: 0px;">
+						
+					</div>
+				</form>	
+
+			</div>
+		
+			<div class="js-update-section container-users-table">	
+
+				<h5 class='table-header' id="class_id">Enrolled Users</h5>
+				<div class="card card-table">
+				
+					<a class="btn btn-custom btn-sm btn-block js-add-button" id="js-add-user" href="#">Add User</a>
+
+					<table class="table table-sm user-table" id="enrolled_users" default-href="{% url 'remove_user' request.user.username %}">
+					    <thead class="thead-light">
+					      <tr class='table-row'>
+					        <th style="width: 25%">Username</th>
+					        <th style="width: 20%">Role</th>
+					        <th style="width: 45%">Email</th>
+					        <th style="width: 10%"></th>
+					      </tr>
+					    </thead>
+
+					    <tbody class="js-table-body">
+							<form method="POST">
+
+							<!-- data will be added here -->
+						 	</form>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>	
+	</body>
+{% endblock %}
+
+

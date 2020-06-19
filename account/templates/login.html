@@ -1,0 +1,79 @@
+{% extends "message_form.html" %}
+{% load static %}
+
+{% block content %}
+
+	<article class="card card-authentication">
+		<div class="card-content">
+			<div class="card-list">
+				<ul class="card-options">
+					<li>
+						<div class="isactive">
+							<a href="{% url 'login' %}">Log in</a>
+						</div>
+					</li>
+					<li>
+						<div class="isinactive">
+							<a href="{% url 'signup' %}">Sign up</a>
+						</div>	
+					</li>
+				</ul>	
+
+				<form method="POST" action='.' novalidate> {% csrf_token %}
+
+
+					<ul class="card-fields">
+						<li>
+							{% for error in form.non_field_errors %}
+		              			<div class="errormsg"> {{ error }} </div>
+		                	{% endfor %}
+		                </li>
+
+		                <li>
+			            	{% if messages %}
+						    	{% for message in messages %}
+						    		<dir class="errormsg"> {{ message }} </dir>	
+						    	{% endfor %}
+							{% endif %}
+						</li>
+						
+						<li>
+							<dir class="errormsg">{{ form.username.errors }}</dir>
+							
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fa fa-user"></i></span>
+									<input name="username" class="form-control form-control-sm" placeholder="Enter Username" type="text">
+								</div>
+							</div>		
+						</li>	
+
+					 	<li>
+					 		<dir class="errormsg">{{ form.password.errors }}</dir>
+
+					 		<div class="input-group mb-2">
+					 			<div class="input-group-prepend">
+							 		<span class="input-group-text"><i class="fas fa-key"></i></span>
+							 		<input name="password" class="form-control form-control-sm" placeholder="Enter Password" type="password">
+							 	</div>
+						 	</div>	 
+					 	</li>
+
+					 	<li>
+	    					<button class="btn-sign" type="submit">Log in</button>
+					 	</li>
+
+					 	<li>
+					 		<div class="question">
+					 			<a class='blue-link' href="{% url 'password_reset_form' %}">Forgot password?</a>
+					 		</div>
+					 	</li>
+
+					</ul>
+				</form>	
+			</div>
+		</div>
+	</article>
+
+
+{% endblock %}

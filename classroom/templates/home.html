@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_content %}
+
+<body>
+
+	<header>    
+	    <div class="header-container-mainpage">
+			<nav class="navbar"> 
+				<ul class="navbar-left">
+				    <li class="app-name">
+				        <a href="#page-top">Classroom</a>
+				    </li>
+				</ul>
+				<ul class="navbar-right">
+					<li>
+
+						<a class="btn btn-authentication btn-sm" href="{% url 'login' %}">
+							<i class="fa fa-fw fa-user"></i>Log in</a>
+
+					</li>
+				  	<li>
+				  		<a class="btn btn-authentication btn-sm" href="{% url 'signup' %}">
+							<i class="fa fa-fw fa-user-plus"></i>Sign up</a>
+				  	</li>
+				</ul>
+			</nav>
+		</div>	
+	</header>
+
+	<div class="main">
+		<div class="classroom">
+			<div class="classroom-left">
+				<h2>Made for teachers to facilitate the coordination of team activities.</h2>
+				<p>Classroom is a free online tool built to help teachers organise group activities.</p>
+				<p>Teachers can create a virtual class and invite students to join via email. Teachers can also send students priority invites for meeting and grouping. Grouping is made easy by giving students a fixed time to choose the group they want to be in.</p>
+			
+			</div>
+
+			<div class="classroom-right">
+				<img id="classroom-graphic" class="classroom-graphics" src="{% static 'image/graphics/3818436.jpg'%}">
+			</div>
+			
+		</div>
+	</div>	
+</body>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,106 @@
+
+
+.priority-body {
+  background-color: #DCDCDC;
+  color: #696969; /* dimgray */
+  padding: 10px;
+  box-sizing: content-box;
+
+}
+
+.priority-body div {
+  text-align: left;
+}
+
+.priority-body div:last-child {
+    text-align: center;
+}
+
+.priority-card {  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: inline-block; 
+  background-color: #9477c0; /* purple */
+  color: #fff;
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.dragme {
+  cursor: move;
+}
+
+
+.group-countdown {
+  color: #696969; /* dimgray */
+  font-size: 8px;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+}
+
+.places-left {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+.places-left h5 {
+  font-size: 20px;
+  margin-bottom: 5px;
+
+}
+
+/* Style the counter cards */
+.card-group {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  display: inline-block; 
+  padding: 10px;
+  margin: 0px;
+  text-align: center;
+  color: #696969; /* dimgray */
+  border-radius: .5em;
+  list-style: none;
+}
+
+.fa-big { font-size:30px; }
+
+
+.container-class-table {
+    display: flex;
+    width: 60%;
+    float: left;
+    padding: 30px 20px 0px 20px;
+    display: inline-block;
+}
+
+.container-users-table {
+    display: flex;
+    width: 40%;
+    float: right;
+    padding: 30px 20px 0px 0px;
+    display: inline-block;
+}
+
+@media only screen and (max-width: 1024px) {
+
+    .container-class-table {
+        display: block;
+        width: 100%;
+        padding: 10px 5px 0px;
+    }
+
+
+    .container-users-table {
+        display: block;
+        width: 100%;
+        padding: 5px 5px 10px;
+    }
+
+}

@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block javascript %}
+	<script type="text/javascript" src="{% static 'js/demos.js' %}"></script>
+{% endblock %}
+
+{% block page_content %}
+
+<body>
+	<header>    
+	    <div class="header-container-userpage">
+			<nav class="navbar"> 
+				<ul class="navbar-left"> 
+				    <li class="app-name">
+				        <a href="{% url 'home' %}">Classroom</a>
+				    </li>
+
+				   	<li class="nav-item dropdown ml-auto">
+				        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Actions</a>
+
+				        	{% if user_role == "Teacher" %}
+					        	<div class="dropdown-menu dropdown-menu-left">
+							        <a href="{% url 'class_invite' request.user.username class.id %}" class="dropdown-item">Send Class Invite</a>
+						            <a href="{% url 'priority_invite' request.user.username class.id %}" class="dropdown-item">Send Priority Invite</a>
+						            <a href="{% url 'grouping_invite' request.user.username class.id %}" class="dropdown-item">Send Grouping Invite</a>
+						        </div>
+					        {% elif user_role == "Student" %}    
+					        	<div class="dropdown-menu dropdown-menu-left">
+				        			<a href="#" class="dropdown-item">Some other action</a>
+				        		</div>
+				        	{% endif %}	
+				    </li>
+				</ul>
+
+				<ul class="navbar-right">
+					<li>
+						<!-- Profile picture miniature -->
+				  		<div class="card card-mini-picture">
+				  			<a href="{% url 'update_profile' request.user.username %}">
+							<img class="mini-picture" src="{{ request.user.profile.picture.url }}" alt="Profile">
+							</a>
+						</div>
+					</li>
+					<li>
+						<p class="welcome-user">Hello, {{ request.user.username }}</p>
+					</li>
+
+				  	<li>
+				  		<form method="POST" action="{% url 'logout' %}"> 
+				  			{% csrf_token %}
+							<button class="btn btn-authentication btn-sm" type="submit">
+								<i class="fa fa-fw fa-user"></i>Log out</button>
+						</form>
+				  	</li>
+
+				  	<li>
+				  		<a class="btn btn-authentication btn-sm" href="{% url 'update_account' request.user.username %}" ><i class="fa fa-fw fa-user-cog"></i>Settings</a>
+				  	</li>
+				  	
+				</ul>
+			</nav>
+		</div>	
+	</header>
+
+	<div class="main">
+		<div class="container">
+			<!-- Draggable Priority Element -->
+			{% if any_priority %} 
+				{% for thisp in priority %}
+					<div class="dragme">
+						<div class="card priority-card">
+
+							<p>Priority Invite</p>
+
+							<div class="group-countdown" expiry="{{ thisp.expiry }}"></div>
+
+							<div class="priority-body">
+								 
+								{% if user_role == "Teacher" %}
+							  		<div>
+								  		<ol>
+									  		{% for user in thisp.users %}
+									  			<li>{{ user }}</li>
+									  		{% endfor %}
+								  		</ol>
+							  		</div>
+							  		
+									<form method="POST" action="{% url 'delete_priority' request.user.username class.id thisp.id %}">{% csrf_token %}
+									  	<div>
+									  		<button class='btn btn-custom btn-sm' type='submit'>Resolve</button>
+										</div>
+									</form>	
+									
+								{% elif user_role == "Student" %}
+
+								  	{% if thisp.status == "done" %}
+								  		<div><p>You've reserved position number {{ thisp.position }}.</p></div>
+
+								  	{% elif thisp.status == "pending" %}
+								  		<div><p>Position number {{ thisp.position }} is still available.</p></div>
+									  	
+									  	<form method="POST" action="{% url 'assign_priority' request.user.username class.id thisp.id %}"> {% csrf_token %}
+									  		
+									  		<div>
+									  			<button class='btn btn-custom btn-sm' type='submit'>Reserve</button>
+									  		</div>
+									  	</form>
+									{% endif %}
+								{% endif %}	
+							</div>
+						</div>
+					</div>
+				{% endfor %}	
+			{% endif %}
+
+			{% if any_groups %} <!-- Draggable Group Element -->
+				{% for group in groups %}
+				<div  class="dragme">
+		  			<div class="column">
+		  				<div class="row">
+		    				<div class="card card-group" style="background:{{ group.color }};">
+								<h4>Group {{ group.num }}</h4>
+
+							    {% if group.places_left != 0 %}	
+							      	<div class='places-left'>
+							      		<i class="fa fa-user fa-big"></i>
+							      		<h5>-{{ group.places_left }}</h5>
+							      	</div>
+							    {% else %}
+							    	<p><i class="fa fa-check fa-big"></i></p>
+							    {% endif %}
+
+							    <div class="group-countdown" expiry="{{ group.expiry }}" 
+							    style="background:{{ group.color }};"></div>
+							      	<ul>
+								  		{% for user in group.users %}
+								  			<li>{{ user }}</li>
+								  		{% endfor %}
+							  		</ul>
+							    {% if user_role == "Student" %}
+
+							    	{% if mygroup == group.id %}
+							    		<form action="{% url 'leave_group' request.user.username class.id group.id %}" method="POST"> {% csrf_token %}
+										  	<button class='btn btn-custom btn-sm' type='submit'>Leave</button>
+										</form>
+									 		
+									{% elif mygroup == None %}
+								    	<form action="{% url 'join_group' request.user.username class.id group.id %}" method="POST"> {% csrf_token %}
+
+										  	<button class='btn btn-custom btn-sm' type='submit'>Join</button>
+										</form>
+									{% endif %}
+
+						    	
+
+						    	{% elif user_role == "Teacher" %}
+						    		<form action="{% url 'delete_group' request.user.username class.id group.id %}" method="POST"> {% csrf_token %}
+										  	<button class='btn btn-custom btn-sm' type='submit'>Close</button>
+									</form>
+
+								{% endif %}		
+							</div>
+		 				</div>
+					</div> 
+				</div> 	
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>	
+</body>
+
+
+
+{% endblock %}

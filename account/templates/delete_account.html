@@ -1,0 +1,23 @@
+{% extends "message_form.html" %}
+{% load static %}
+
+{% block content %}
+	<article class="card card-message">
+		<div class="card-content-message">
+
+			<h5 class="card-message-title">Confirm Accout Deletion</h5>
+
+		  	<p>Are you sure you want to delete your account?</p>
+		  	<div class="text-center">
+			  	 <div class="btn-group inline pull-left justified-center">
+				  	<form method='POST' action="{% url 'delete_account' request.user.username %}">
+				  		{% csrf_token %}
+						<button class='btn btn-sign btn-sm' type="submit">Yes, Delete</button>
+					</form>
+					<a class="btn btn-sign btn-sm" href="{% url 'dashboard' request.user.username %}">Cancel</a>
+				</div>
+			</div>
+		</div>
+	</article>
+
+{% endblock %}

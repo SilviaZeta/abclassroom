@@ -1,0 +1,15 @@
+{% extends 'message_form.html' %}
+
+{% block content %}
+
+	<article class="card card-message">
+		<div class="card-content-message">
+
+			<h5 class="card-message-title">Add User Outcome</h5>
+		  	<p>{{ message }}</p>
+		  	<a class="blue-link" href="{% url 'dashboard' request.user.username %}">Back to Dashboard</a>
+
+		</div>
+	</article>
+
+{% endblock %}

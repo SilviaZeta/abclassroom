@@ -151,7 +151,7 @@ STATICFILES_DIRS = [
                     os.path.join(BASE_DIR, "classroom/static"),
                     ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/')
 
 DEFAULT_DOMAIN = 'https://abclassroom.herokuapp.com'
 

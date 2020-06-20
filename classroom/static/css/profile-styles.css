@@ -188,6 +188,7 @@ a.disabled{
 	color: #696969; /* grey */
 	border: none; /* important */
 	padding: 0px; /* important */
+	background: transparent;
 }
 
 .icon-custom-disabled:hover {

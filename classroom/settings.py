@@ -36,6 +36,9 @@ CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', default=True, cast=bool)
 # to avoid transmitting the session cookie over HTTP accidentally.
 SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=True, cast=bool) 
 
+ADMINS = [('Silvia', 'silviazeni@hotmail.it')] #will be notified of 500 errors by email.
+MANAGERS = ADMINS #will be notified of 404 errors.
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -46,10 +49,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'multi_email_field',
+    'storages', #django-storages
     'widget_tweaks', #added to customize template forms
     'guardian', #added to assign model-specific permissions
     'account',
     'myclass',
+
 ]
 
 MIDDLEWARE = [
@@ -133,35 +138,70 @@ USE_L10N = True
 USE_TZ = True
 
 
+ROLEPERMISSIONS_MODULE = 'classroom.roles' 
+
+
 #custom 404 response
 handler404 = 'classroom.views.custom_404_view'
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = '/static/'
-
-#heroku is going to put static files here
-STATIC_ROOT =  os.path.join(BASE_DIR, 'staticfiles')
-
-MEDIA_URL = '/images/'
 
 #this is for finding static file inside non app directory
 STATICFILES_DIRS = [
                     os.path.join(BASE_DIR, "classroom/static"),
                     ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/')
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-DEFAULT_DOMAIN = 'https://abclassroom.herokuapp.com'
+if DEBUG:
 
-ROLEPERMISSIONS_MODULE = 'classroom.roles' 
+    STATIC_URL = '/static/' #development only 
 
-FILE_UPLOAD_TEMP_DIR = '/tmp/'
+    MEDIA_URL = '/media/' #development only 
 
-FILE_UPLOAD_PERMISSIONS = 0o644
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media') #development only 
 
-FILE_UPLOAD_MAX_MEMORY_SIZE = 33554432
+    DEFAULT_DOMAIN = 'http://localhost:8000/'
+
+else:
+    # S3 Bucket Config
+    AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+
+    AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+
+    AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
+
+    AWS_S3_FILE_OVERWRITE = config('AWS_S3_FILE_OVERWRITE', default=False, cast=bool) #do not override files with same name
+
+    AWS_DEFAULT_ACL = None 
+
+    AWS_S3_REGION_NAME = config("AWS_S3_REGION_NAME")
+
+    AWS_S3_SIGNATURE_VERSION = config("AWS_S3_SIGNATURE_VERSION")
+
+    STATIC_URL = "https://%s/" %AWS_S3_CUSTOM_DOMAIN
+
+    DEFAULT_DOMAIN = STATIC_URL
+
+    #where collectstatic is going to copy static files
+    STATIC_ROOT =  os.path.join(BASE_DIR, 'staticfiles')
+
+    #STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' 
+    STATICFILES_STORAGE = 'classroom.s3utils.StaticRootS3Boto3Storage' #static files are uploaded to S3 bucket, in "static"
+
+    #DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    DEFAULT_FILE_STORAGE = 'classroom.s3utils.MediaRootS3Boto3Storage' #media files are uploaded to S3 bucket, in "media"
+
+    # File Upload Config
+    FILE_UPLOAD_TEMP_DIR = '/tmp/'
+
+    FILE_UPLOAD_PERMISSIONS = 0o644
+
+    FILE_UPLOAD_MAX_MEMORY_SIZE = 33554432
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #reduce the size of the static files when they are served
+
 
 # SMPT Configuration 
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # developement only!
@@ -185,12 +225,3 @@ AUTHENTICATION_BACKENDS = (
                             'guardian.backends.ObjectPermissionBackend',
                             )
 
-
-ADMINS = [('Silvia', 'silviazeni@hotmail.it')] #will be notified of 500 errors by email.
-
-MANAGERS = ADMINS #will be notified of 404 errors.
-
-
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #reduce the size of the static files when they are served

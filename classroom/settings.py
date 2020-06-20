@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import dj_database_url
 from decouple import config, Csv
+import django_heroku
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -145,12 +146,12 @@ ROLEPERMISSIONS_MODULE = 'classroom.roles'
 handler404 = 'classroom.views.custom_404_view'
 
 #this is for finding static file inside non app directory
-STATICFILES_DIRS = [
-                    os.path.join(BASE_DIR, "classroom/static"),
-                    ]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "classroom/static"), ]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
+
+
 
 if DEBUG:
 
@@ -178,20 +179,22 @@ else:
 
     AWS_S3_SIGNATURE_VERSION = config("AWS_S3_SIGNATURE_VERSION")
 
-    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' %AWS_STORAGE_BUCKET_NAME
 
-    STATIC_URL = "https://%s/" %AWS_S3_CUSTOM_DOMAIN
+    DEFAULT_DOMAIN = "https://%s/" %AWS_S3_CUSTOM_DOMAIN
 
-    DEFAULT_DOMAIN = STATIC_URL
+    # STATIC FILES
+    AWS_STATIC_LOCATION = 'static'
+    STATICFILES_STORAGE = 'classroom.s3utils.StaticStorage' #static files are uploaded to S3 bucket, in "static"
+    STATIC_URL = "https://%s/%s/" %(AWS_S3_CUSTOM_DOMAIN, AWS_STATIC_LOCATION)
+
+    # MEDIA FILES
+    AWS_MEDIA_LOCATION = 'media'
+    DEFAULT_FILE_STORAGE = 'classroom.s3utils.MediaStorage' #media files are uploaded to S3 bucket, in "media"
+    MEDIA_URL = "https://%s/%s/" %(AWS_S3_CUSTOM_DOMAIN, AWS_MEDIA_LOCATION)
 
     #where collectstatic is going to copy static files
     STATIC_ROOT =  os.path.join(BASE_DIR, 'staticfiles')
-
-    #STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' 
-    STATICFILES_STORAGE = 'classroom.s3utils.StaticRootS3Boto3Storage' #static files are uploaded to S3 bucket, in "static"
-
-    #DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    DEFAULT_FILE_STORAGE = 'classroom.s3utils.MediaRootS3Boto3Storage' #media files are uploaded to S3 bucket, in "media"
 
     # File Upload Config
     FILE_UPLOAD_TEMP_DIR = '/tmp/'
@@ -200,10 +203,9 @@ else:
 
     FILE_UPLOAD_MAX_MEMORY_SIZE = 33554432
 
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #reduce the size of the static files when they are served
 
+# Activate Django-Heroku.
+django_heroku.settings(locals(), staticfiles=False)
 
 # SMPT Configuration 
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # developement only!

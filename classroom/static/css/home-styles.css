@@ -133,6 +133,13 @@
 }
 
 
+.graphics-link:active, .graphics-link:focus {
+	border: none;
+	outline: none;
+
+}
+
+
 hr {
 	border: solid 2px #4d3e64;
 	border-radius: 5em;

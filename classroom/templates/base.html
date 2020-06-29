@@ -1,14 +1,15 @@
 {% load static %}
 
+
 <!DOCTYPE html>
 <html>
 
   <head> 
-    <title>Classroom</title>
+    <title>ABClassroom</title>
     <meta charset="utf-8">
-    <meta name="author" content="Silvia Zeni">
-    <meta name="keywords" content="classroom meeting grouping school">
-    <meta name="description" content="Classroom">
+    <meta name="author" content="silvia zeni">
+    <meta name="description" content="abclassroom is a free online tool built 
+    to help teachers organise group activities">
 
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -25,26 +26,22 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'image/favicon_io/favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'image/favicon_io/site.webmanifest' %}">
    
-    <!-- Google Fonts -->
 
     <!-- JQuery draggable -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet"href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- jQuery countdown -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.countdown.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.countdown.css' %}">
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/home-styles.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/login-styles.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/profile-styles.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/class-styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home-styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login-styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile-styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/class-styles.css' %}">
   </head>
 
 
-    {% block page_content %}
-
-
-    {% endblock %}
+    {% block page_content %} <!-- page content --> {% endblock %}
 
  <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -54,17 +51,19 @@
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    {% block javascript %} <!-- app-specific javascript code --> {% endblock %}
+    <!-- csrf for AJAX calls -->
     <script type="text/javascript" src="{% static 'js/csrf.js' %}"></script>
 
     <!-- jQuery Draggable --> 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <!-- jQuery Countdown -->
     <script type="text/javascript" src="{% static 'js/countdown/jquery.plugin.js' %}"></script> 
     <script type="text/javascript" src="{% static 'js/countdown/jquery.countdown.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/countdown/jquery.countdown.min.js' %}"></script>
+
+    {% block javascript %} <!-- app-specific javascript code --> {% endblock %}
 
 
 </html>

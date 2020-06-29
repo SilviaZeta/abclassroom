@@ -53,8 +53,8 @@ INSTALLED_APPS = [
     'storages', #django-storages
     'widget_tweaks', #added to customize template forms
     'guardian', #added to assign model-specific permissions
-    'account',
-    'myclass',
+    'apps.account',
+    'apps.myclass',
 
 ]
 
@@ -159,7 +159,7 @@ if DEBUG:
 
     MEDIA_URL = '/media/' #development only 
 
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media') #development only 
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'classroom/media') #development only 
 
     DEFAULT_DOMAIN = 'http://localhost:8000/'
 
@@ -181,8 +181,6 @@ else:
 
     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' %AWS_STORAGE_BUCKET_NAME
 
-    DEFAULT_DOMAIN = "https://%s/" %AWS_S3_CUSTOM_DOMAIN
-
     # STATIC FILES
     AWS_STATIC_LOCATION = 'static'
     STATICFILES_STORAGE = 'classroom.s3utils.StaticStorage' #static files are uploaded to S3 bucket, in "static"
@@ -202,6 +200,8 @@ else:
     FILE_UPLOAD_PERMISSIONS = 0o644
 
     FILE_UPLOAD_MAX_MEMORY_SIZE = 33554432
+
+    DEFAULT_DOMAIN = "https://%s/" %ALLOWED_HOSTS[1]
 
 
 # Activate Django-Heroku.

@@ -6,16 +6,16 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		/* Retrieve some variables */
-		var class_id = $(this).attr('class_id');
-		var class_url = $(this).attr('enroll-users-url');
-		var class_slug = $(this).attr('class_slug'); 
-		var class_role = $(this).attr('class_role'); 
-		var username = $(this).attr('username'); 
+		let class_id = $(this).attr('class_id');
+		let class_url = $(this).attr('enroll-users-url');
+		let class_slug = $(this).attr('class_slug'); 
+		let class_role = $(this).attr('class_role'); 
+		let username = $(this).attr('username'); 
 
 
 		/* Add User Button */
 		//var base_add_user_url = document.getElementById('js-add-user').getAttribute("default-href");
-		document.getElementById('js-add-user').href = class_url+'add_user/'+class_id+'/'; 
+		document.getElementById('js-add-user').href = `${class_url}add_user/${class_id}/`; 
 
 		/* Retrieve user list from database */
 
@@ -37,14 +37,14 @@ $(document).ready(function() {
 					$("#enrolled_users tbody").empty();
 
 					// display the newly friend to table.
-					var data = response["data"];
+					let data = response["data"];
 
 					//var base_del_user_url = document.getElementById('enrolled_users').getAttribute("default-href");
 	                
 	            	if (class_role == 'Teacher') {
 
 	            		/* Enable Add Button */
-			        	var add_button = document.getElementById('js-add-user');
+			        	let add_button = document.getElementById('js-add-user');
 			        	if ( add_button.classList.contains('disabled') ) {
 			        		add_button.classList.remove('disabled');
 			        	}
@@ -53,7 +53,7 @@ $(document).ready(function() {
 		                	
 		                	if (data["role"][i] == "Student") {
 
-		                		var custom_url = class_url+"remove_user/"+class_id+"/"+data["id"][i]+"/";
+		                		let custom_url = `${class_url}remove_user/${class_id}/${data["id"][i]}/`;
 
 				                $("#enrolled_users tbody").prepend(
 				                    `<tr>
@@ -65,7 +65,7 @@ $(document).ready(function() {
 				                    </tr>`)
 				             
 				            } else if (data["role"][i] == "Pending") {
-				            	var custom_url = class_url+"approve_user/"+class_id+"/"+data["id"][i]+"/";
+				            	let custom_url = `${class_url}approve_user/${class_id}/${data["id"][i]}/`;
 
 				            	$("#enrolled_users tbody").prepend(
 				                    `<tr>
@@ -89,7 +89,7 @@ $(document).ready(function() {
 			        } else if (class_role == 'Student') {
 			        	
 			        	/* Disable Add Button */
-			        	var add_button = document.getElementById('js-add-user');
+			        	let add_button = document.getElementById('js-add-user');
 			        	if ( ! add_button.classList.contains('disabled') ) {
 			        		add_button.classList.add('disabled');
 			        	}
@@ -98,7 +98,8 @@ $(document).ready(function() {
 			        	for (var i=0; i < data["id"].length; i++) {
 
 			        		if (username == data["username"][i]) {
-			        			var custom_url = class_url+"remove_user/"+class_id+"/"+data["id"][i]+"/";
+			        			let custom_url = `${class_url}remove_user/${class_id}/${data["id"][i]}/`;
+			        			
 		                		
 				            	$("#enrolled_users tbody").prepend(
 				                    `<tr>

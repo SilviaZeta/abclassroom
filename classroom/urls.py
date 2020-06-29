@@ -23,8 +23,8 @@ urlpatterns = [
                
     path('admin/', admin.site.urls),
     path('', views.home_view, name='home'),
-    path('', include('account.urls')),
-    path('', include('myclass.urls')),
+    path('', include('apps.account.urls')),
+    path('', include('apps.myclass.urls')),
 ]
 
 

@@ -27,7 +27,7 @@ class UpdateProfileForm(forms.ModelForm):
     def save(self, commit=True):
         # save a profile
         profile = super().save(commit=False)   
-        profile.full_name = self.cleaned_data.get('full__name')
+        profile.full_name = self.cleaned_data.get('full_name')
         profile.bio = self.cleaned_data.get('bio')
         profile.picture = self.cleaned_data.get('picture')
 
